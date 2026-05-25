@@ -1,144 +1,65 @@
-<div align="center">
+# Manga Localizer Agent
 
-# 漫 Manga Localizer Agent
+Cross-language manga, manhwa, and manhua localization. Translates the bubble, transcreates the SFX, keeps the joke, lays out the page.
 
-**An autonomous AI agent for cross-language manga, manhwa, and manhua localization.**
-*Keeps the bubbles, the SFX, and the joke. Not just translation.*
+> **Status: concept artifact, pre-MVP.** Trilingual landing, interactive demo, architecture spec, live Jisho probe. CLI and trained bubble detector are next.
 
-[![Live Demo](https://img.shields.io/badge/live-demo-1a1a1a?style=for-the-badge&logo=safari&logoColor=white)](#)
-[![Try the Agent](https://img.shields.io/badge/try-the%20agent-c0392b?style=for-the-badge&logo=openai&logoColor=white)](#)
-[![Status](https://img.shields.io/badge/status-concept%20stage%20%C2%B7%20pre--MVP-1d6f47?style=for-the-badge)](#roadmap)
-[![License: MIT](https://img.shields.io/badge/license-MIT-6e6e6e?style=for-the-badge)](./LICENSE)
-
-</div>
+**Live demo:** *enabled after the repo is pushed and GitHub Pages flips on — link drops here once it's live.*
 
 ---
 
-## 🔗 Live
+## Why generic translators fall short
 
-| | |
-|---|---|
-| 🪟 **Landing page** | _to be deployed_ |
-| 🛟 **Interactive demo** | _to be deployed_ |
-| 🌐 **Languages** | Japanese · English · Bahasa Indonesia · 简体中文 |
-| ⚙️ **Live LLM mode** | Bring your own OpenAI-compatible key (MiMo · OpenAI · Groq · xAI · Together · Custom) |
+A weekly fan-scanlation chapter is roughly 18 pages × 6 bubbles × 4 SFX. That's ~108 bubbles and ~72 onomatopoeia decisions per chapter. A generic translator flattens all that into a CSV of strings. The medium breaks.
 
----
+What a real chapter actually requires:
 
-## 🎯 Why this exists
-
-Manga, manhwa, and manhua aren't text — they're **text inside a visual grammar.** Existing tools translate words; they don't preserve bubbles, SFX, panel order, honorifics, or the joke.
-
-| Problem | What generic translators do | What this agent does |
-|---|---|---|
-| 🗨️ Speech bubble fit | Truncate or overflow | Calculate polygon area, pick font + leading |
-| 💥 SFX `どきどき` | Romanize to "doki doki" | Transcreate to "thump-thump" / "deg-degan" / "砰砰" |
-| 🥇 Honorific `先輩` | Drop or misrender | Map per target language convention |
-| 😂 Kanji pun | Drop or footnote-only | Reconstruct equivalent target-language pun |
-| 🍢 Cultural ref `こたつ` | Drop or romanize | Decide: preserve, swap, or footnote |
-| 📖 Panel order RTL | Ignore | Flip to LTR for EN/ID readers when needed |
-
-This is the gap between "machine translation that *works*" and "machine translation that *ships*."
+- **Bubble fit.** A 12-character JP line might expand to 28 characters in EN. The polygon doesn't grow — font, leading, and line breaks recalculate per bubble.
+- **SFX onomatopoeia.** `どきどき` is "thump-thump" in EN, "deg-degan" in ID, "砰砰" in ZH — not "doki doki" for general readers. SFX is a tunable artistic policy, not a hard rule.
+- **Honorifics.** `先輩` keeps as "senpai" for fan scanlation, becomes "upperclassman" for licensed EN, drops entirely for some ID releases.
+- **Kanji puns.** A pun on `橋` (hashi, bridge) and `箸` (hashi, chopsticks) is dead in literal translation. Reconstruct an equivalent — or footnote the choice.
+- **Cultural references.** `こたつ` (kotatsu) — preserve, swap to "heated table", or footnote? Context-aware call, surfaced for review.
+- **Panel order.** Japanese pages read right-to-left. EN/ID readers expect LTR. Flip the reading order when the target market expects it.
 
 ---
 
-## 🧭 Four-layer agent loop
-
-<table>
-<tr>
-<th>Layer</th>
-<th>What it does</th>
-<th>Tier</th>
-</tr>
-<tr>
-<td><strong>01 · Perception 👁️</strong></td>
-<td>OCR speech bubbles, detect bubble polygons via CV, find SFX outside bubbles, classify panel reading order (RTL/LTR).</td>
-<td>cheap</td>
-</tr>
-<tr>
-<td><strong>02 · Translation 📝</strong></td>
-<td>Per-bubble translate against last 3-panel context, character voice cache, honorific mapping per target language.</td>
-<td>cheap</td>
-</tr>
-<tr>
-<td><strong>03 · Transcreation ✨</strong></td>
-<td>SFX onomatopoeia mapping. Idiom transcreation (not literal). Kanji-pun reconstruction. Cultural reference: keep, swap, or footnote.</td>
-<td><strong>smart</strong></td>
-</tr>
-<tr>
-<td><strong>04 · Typesetting 🖋️</strong></td>
-<td>Bubble fit calculation, font matching (Wild Words / Mangat), SFX styling (italic + bold + skew), RTL→LTR panel flip when needed.</td>
-<td>cheap + smart</td>
-</tr>
-</table>
-
----
-
-## ⚖️ Cost-tier routing
+## The four layers
 
 ```
-┌────────────────────────────── 100% ──────────────────────────────┐
-│                                                                  │
-│  cheap tier                                       smart tier     │
-│  ████████████████████████████████████████████░░░░░░░░░░░░░░░░░░  │
-│  ~80%  perception · raw translate · format        ~20% transcreate│
-│                                                                  │
-└──────────────────────────────────────────────────────────────────┘
+01  PERCEPTION    OCR + bubble polygon detection + SFX-outside-bubbles + panel order classification
+02  TRANSLATION   per-bubble translate against rolling 3-panel context + character voice cache + honorifics
+03  TRANSCREATION SFX onomatopoeia + idiom + pun reconstruction + cultural ref decision  ← reasoning lives here
+04  TYPESETTING   bubble fit + font match + SFX styling + RTL→LTR flip if target expects it
 ```
 
-> 🟢 **Cheap tier** — OCR · bubble detection · raw translate with context · honorific mapping · bubble fit · font matching · RTL→LTR flip.
->
-> 🟡 **Smart tier** — SFX onomatopoeia mapping · idiom transcreation · pun reconstruction · cultural reference handling · SFX styling preset selection.
+The first two are cheap. The third is where the model has to actually think. The fourth is geometry with a touch of style.
 
-**Why this matters for unit economics.** A scanlator running 200 pages/week with ~6 bubbles/page makes ~1,200 LLM calls/week. Most need to be small fast cheap calls. The smart tier is reserved for actual creative decisions. ~80/20 is the shape that fits a fan-scanlation budget — and a natural fit for a tiered model family that bills cheap calls cheaply.
+Architecture details: [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md).
 
 ---
 
-## 🌐 Why this is a multilingual showcase
+## Cost shape
 
-The agent operates across **four languages with three direction matrices**:
+A scanlation group running 200 pages a week makes ~1,200 LLM calls a week. Most are small, fast, cheap.
 
 ```
-JP → EN     // Western fan scanlation, official EN licensing
-JP → ID     // ASEAN reader market, growing legitimate licensing
-JP → CN     // CN reader market, both fan and licensed
-KR → EN/ID  // Manhwa boom in ASEAN
-CN → EN/ID  // Manhua cross-export
+~80%  cheap tier  — perception, raw translate, format, geometry
+~20%  smart tier  — transcreation, creative decisions
 ```
 
-Cultural transcreation across these direction pairs is **reasoning that requires native fluency in source AND target**, not just word-level mapping. This is exactly the territory where multilingual model families shine over English-only tooling.
+Only the transcreation calls — onomatopoeia, idiom, pun, cultural — earn the smart tier. The same routing logic fits any tiered model family.
 
 ---
 
-## ✨ What makes this build legible
+## Bring-your-own-LLM
 
-- 🎨 **Hand-drawn comparison panels** — JP/EN/ID/CN side-by-side showing the same scene transcreated, not just translated.
-- 🌐 **Trilingual landing UI** — EN / ID / CN, language toggle persists across sessions.
-- 🛟 **Interactive demo** — pick from 5 sample challenges (idiom · SFX · honorific · pun · cultural ref), watch the four layers run with their tool calls and decisions visible.
-- ⚙️ **Bring-your-own-LLM mode** — paste an OpenAI-compatible key, the demo's transcreation layer becomes a live call to your provider.
-- 🔍 **Live data probe** — `scripts/jisho_probe.py` hits the public Jisho dictionary API to demonstrate the agent's linguistic data layer is real, not mocked.
-- ✅ **Honest framing** — concept-stage, pre-MVP, scope cuts spelled out. No over-claim.
+The demo's transcreation layer accepts an OpenAI-compatible key. Paste it in the demo's settings panel; it routes through your provider (MiMo, OpenAI, Groq, xAI, Together, or any custom endpoint). The key stays in `localStorage`. Nothing is logged.
 
 ---
 
-## 🚫 What's intentionally not in scope
+## Live linguistic probe
 
-- **Pirate scanlation pipeline.** The agent is a tool, not a distribution platform. Source rights stay with the publisher.
-- **Voice acting / dub generation.** Manga is a print medium first. Audio is out of scope.
-- **Auto-coloring of black-and-white pages.** Color is artistic intent, not a localization decision.
-- **Full studio replacement.** A human translator stays in the loop on smart-tier output. The agent accelerates, it does not replace.
-
----
-
-## ⚠️ Biggest open risk
-
-> **SFX onomatopoeia is a creative policy, not a solved problem.**
->
-> A literal `どきどき` → "doki doki" satisfies fans of Japanese conventions but breaks for general EN/ID/CN readers. The SFX mapper is a tunable artistic policy — fan scanlators and licensed studios choose differently. We expose this as a knob, not pretend there's a single right answer.
-
----
-
-## 🔍 Live Jisho probe (no auth required)
+The data layer is real, not mocked. A small script hits the public Jisho dictionary API and returns canonical readings, parts of speech, and example senses for any JP word.
 
 ```bash
 python3 scripts/jisho_probe.py 先輩
@@ -146,56 +67,77 @@ python3 scripts/jisho_probe.py 猫の手も借りたい --limit 3
 python3 scripts/jisho_probe.py どきどき --raw
 ```
 
-Hits `jisho.org/api/v1/search/words` — the public Japanese dictionary API, no key needed. Returns canonical readings, parts of speech, and example senses. Proof-of-life for the agent's linguistic data layer.
+No key required. Endpoint: `jisho.org/api/v1/search/words`.
 
 ---
 
-## 🗺️ Roadmap
+## What ships today
 
-| Stage | What | When |
-|:---:|---|---|
-| **M0** ✅ | Concept · landing · interactive demo · architecture spec · Jisho probe | Today |
-| **M1** ⏳ | CLI proof: PNG manga panel → JSON output (bubble bbox + translation + SFX mapping). Bring-your-own-LLM mode. | Next |
-| **M2** | Web SPA: drag-drop a page, see it localized inline, manual fix-up tool for typesetters. | Q3 |
-| **M3** | Scanlator group integration — Discord bot, batch upload, team review workflow, glossary persistence per series. | Q4+ |
+- Trilingual landing page (EN / ID / 中文) describing the architecture.
+- Interactive demo with five sample challenges — idiom, SFX, honorific, pun, cultural reference — running scripted reasoning across the four layers, plus a live LLM mode for the transcreation layer.
+- Architecture document covering layer interfaces, module boundaries, and cost-tier routing.
+- Live Jisho probe script.
+
+## What does not ship yet
+
+- A working CLI that takes a PNG and emits structured output.
+- Bubble polygon detection trained on a real manga dataset.
+- A typesetter that writes back into the cleaned page.
 
 ---
 
-## 📁 Project structure
+## Roadmap
+
+- **M0 — today.** Concept artifact: landing, interactive demo, architecture spec, Jisho probe.
+- **M1 — next.** CLI: PNG manga panel in, JSON out (bubble bbox + translation + SFX mapping). Bring-your-own-LLM wired end-to-end.
+- **M2.** Web SPA: drag-drop a page, inline localization preview, typesetter manual fix-up tool.
+- **M3.** Scanlator group integration — Discord bot, batch upload queue, team review workflow, per-series glossary persistence.
+
+---
+
+## The open problem this agent does not pretend to solve
+
+**SFX policy is artistic.** A literal `どきどき` → "doki doki" satisfies fan-scanlation conventions and breaks for general readers. The agent exposes SFX mapping as a tunable knob, not a single right answer. Fan groups and licensed studios will set it differently. Defaults ship per target language; the typesetter UI surfaces the decision for override.
+
+---
+
+## Out of scope
+
+- **Pirate distribution pipelines.** This is a translation tool. Source rights stay with the publisher.
+- **Voice acting / dub generation.** Manga is print-first. Audio is a different problem.
+- **Auto-coloring.** Color is artistic intent, not a localization decision.
+- **Full studio replacement.** Smart-tier output is a draft. The human stays in the loop.
+
+---
+
+## Repository layout
 
 ```
 manga-localizer-agent/
-├── index.html                  # landing page (EN/ID/CN, hero + 4-layer + cost-tier)
+├── index.html              landing — EN/ID/中文 hero, four-layer overview, cost shape
 ├── assets/
-│   ├── style.css               # ink-paper light theme, manga-screen-tone accents
-│   ├── i18n.js                 # language toggle (persistent)
-│   ├── hero.svg                # JP/EN/ID/CN side-by-side comparison panels
-│   ├── architecture.svg        # four-layer pipeline diagram
-│   └── favicon.svg             # 漫 + MLA mark
+│   ├── style.css           ink-paper theme + manga screen-tone accents
+│   ├── i18n.js             persistent EN/ID/中文 toggle
+│   ├── hero.svg            JP/EN/ID/中文 side-by-side comparison panels
+│   ├── architecture.svg    four-layer pipeline diagram
+│   └── favicon.svg         漫 + MLA mark
 ├── demo/
-│   ├── index.html              # interactive demo with 5 sample challenges
+│   ├── index.html          interactive demo, five sample challenges
 │   ├── demo.css
-│   └── demo.js                 # scripted runtime + live LLM mode
+│   └── demo.js             scripted reasoning + live LLM mode
 ├── docs/
-│   └── ARCHITECTURE.md         # four-layer pipeline + cost-tier + module boundaries
+│   └── ARCHITECTURE.md     layer interfaces, module boundaries, cost-tier routing
 ├── scripts/
-│   └── jisho_probe.py          # live Jisho public API probe
+│   └── jisho_probe.py      live Jisho dictionary API probe
 ├── README.md
-├── LICENSE
+├── LICENSE                 MIT
 └── .gitignore
 ```
 
 ---
 
-## 📜 License
+## License
 
-MIT — see [LICENSE](./LICENSE). Free to study, fork, and ship.
+MIT. Free to study, fork, and ship.
 
----
-
-<div align="center">
-
-*Built for translators, not to replace them.* 漫
-*The bubble has to fit. The joke has to land. The cat has to stay.*
-
-</div>
+Built for translators. The bubble has to fit. The joke has to land. The cat has to stay.
