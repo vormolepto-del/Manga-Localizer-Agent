@@ -4,7 +4,7 @@ Cross-language manga, manhwa, and manhua localization. Translates the bubble, tr
 
 > **Status: concept artifact, pre-MVP.** Trilingual landing, interactive demo, architecture spec, live Jisho probe. CLI and trained bubble detector are next.
 
-**Live demo:** *enabled after the repo is pushed and GitHub Pages flips on — link drops here once it's live.*
+**Live demo:** https://vormolepto-del.github.io/Manga-Localizer-Agent/
 
 ---
 
