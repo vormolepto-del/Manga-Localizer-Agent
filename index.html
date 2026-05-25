@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manga Localizer Agent — Autonomous AI for cross-language manga, manhwa, and manhua</title>
+    <meta name="description" content="An autonomous AI agent that localizes manga, manhwa, and manhua across JP/EN/ID/CN — preserving bubbles, SFX, and cultural transcreation, not just translating text." />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="assets/style.css?v=1" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Manga Localizer Agent" />
+    <meta property="og:description" content="Autonomous AI agent that localizes manga across JP/EN/ID/CN — preserves bubbles, SFX, cultural transcreation. Not just translation." />
+    <meta property="og:image" content="assets/hero.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Manga Localizer Agent" />
+    <meta name="twitter:description" content="Cross-language manga localization with cultural transcreation. JP/EN/ID/CN. Bring your own LLM." />
+
+    <script src="assets/i18n.js?v=1"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a href="#" class="brand">
+          <span class="brand-mark">漫</span>
+          <span>Manga Localizer Agent</span>
+        </a>
+        <div class="lang-switch" role="tablist" aria-label="Language">
+          <button data-lang="en" class="active" type="button">EN</button>
+          <button data-lang="id" type="button">ID</button>
+          <button data-lang="cn" type="button">中</button>
+        </div>
+      </div>
+    </header>
+
+    <header class="hero wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow" data-lang-en class="active">Concept stage · Pre-MVP</span>
+          <span class="eyebrow" data-lang-id>Tahap konsep · Pra-MVP</span>
+          <span class="eyebrow" data-lang-cn>概念阶段 · 预 MVP</span>
+
+          <h1 data-lang-en class="active">Localize manga across languages — keep the bubbles, the SFX, and the joke.</h1>
+          <h1 data-lang-id>Lokalisasi manga lintas bahasa — pertahankan bubble, SFX, dan punchline-nya.</h1>
+          <h1 data-lang-cn>跨语言本地化漫画 — 保留对话气泡、拟声词与笑点。</h1>
+
+          <p class="lede" data-lang-en class="active">An autonomous agent that takes a raw manga, manhwa, or manhua page and returns it localized across JP/EN/ID/CN — speech bubbles re-typeset, sound effects restyled, idioms transcreated. Not just translation.</p>
+          <p class="lede" data-lang-id>Agent otonom yang mengambil satu halaman manga, manhwa, atau manhua mentah, lalu mengembalikannya dalam JP/EN/ID/CN — bubble di-typeset ulang, SFX di-restyle, idiom di-transcreate. Bukan sekadar terjemahan.</p>
+          <p class="lede" data-lang-cn>一个自主代理：输入一页漫画原稿（漫画／漫画／漫画），输出 JP/EN/ID/CN 四语本地化版本 — 对话气泡重新排版、拟声词重新设计、习语创译。不只是翻译。</p>
+
+          <div class="cta-row">
+            <a class="btn" href="demo/" data-lang-en class="active">▶ Try the demo</a>
+            <a class="btn" href="demo/" data-lang-id>▶ Coba demo</a>
+            <a class="btn" href="demo/" data-lang-cn>▶ 试用演示</a>
+
+            <a class="btn ghost" href="https://github.com/" data-lang-en class="active">View on GitHub</a>
+            <a class="btn ghost" href="https://github.com/" data-lang-id>Lihat di GitHub</a>
+            <a class="btn ghost" href="https://github.com/" data-lang-cn>查看 GitHub</a>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <img src="assets/hero.svg" alt="Four manga panels showing the same scene localized into JP, EN, ID, and CN" />
+        </div>
+      </div>
+    </header>
+
+    <section class="wrap" id="why">
+      <h2><span class="num">01</span><span data-lang-en class="active">Why translation isn't enough</span><span data-lang-id>Kenapa terjemahan biasa tidak cukup</span><span data-lang-cn>为何单纯翻译远远不够</span></h2>
+
+      <p class="section-sub" data-lang-en class="active">Manga, manhwa, and manhua aren't text — they're text inside a visual grammar. Existing tools translate words; they don't preserve bubbles, SFX, panel order, honorifics, or the joke.</p>
+      <p class="section-sub" data-lang-id>Manga, manhwa, dan manhua bukan teks polos — mereka teks di dalam tata visual. Tools yang ada menerjemah kata saja; tidak menjaga bubble, SFX, urutan panel, honorific, atau punchline.</p>
+      <p class="section-sub" data-lang-cn>漫画／漫画／漫画不只是文字，而是嵌在视觉语法中的文字。现有工具只翻译字词，无法保留气泡、拟声词、阅读顺序、敬称或笑点。</p>
+
+      <div class="compare">
+        <div class="panel">
+          <span class="panel-tag tag-jp">JP · source</span>
+          <p class="bubble-text">「猫の手も借りたい」</p>
+          <p class="sfx">どきどき</p>
+          <p class="note" data-lang-en class="active">Idiom: literally "even a cat's paw to borrow", meaning "I'm so swamped." SFX = heart racing.</p>
+          <p class="note" data-lang-id>Idiom: harfiah "pinjam tangan kucing pun mau", artinya "lagi sibuk banget". SFX = jantung berdebar.</p>
+          <p class="note" data-lang-cn>俗语字面"连猫爪都想借"，实际意思是"忙得不可开交"。拟声词 = 心跳加速。</p>
+        </div>
+        <div class="panel">
+          <span class="panel-tag tag-en">EN · transcreated</span>
+          <p class="bubble-text">"I need an extra pair of hands."</p>
+          <p class="sfx">thump-thump</p>
+          <p class="note" data-lang-en class="active">Idiom adapted to a natural EN equivalent. SFX restyled to match Western comic convention.</p>
+          <p class="note" data-lang-id>Idiom diadaptasi ke padanan EN alami. SFX di-restyle ke konvensi komik Barat.</p>
+          <p class="note" data-lang-cn>习语转换为自然的英文对等表达。拟声词按西方漫画风格重新设计。</p>
+        </div>
+        <div class="panel">
+          <span class="panel-tag tag-id">ID · transcreated</span>
+          <p class="bubble-text">"Lagi butuh tangan lebih nih."</p>
+          <p class="sfx">deg-degan</p>
+          <p class="note" data-lang-en class="active">Idiom rendered in conversational Indonesian. SFX uses Indonesian onomatopoeia for racing heart.</p>
+          <p class="note" data-lang-id>Idiom diterjemahkan ke Bahasa Indonesia percakapan. SFX pakai onomatope Indonesia untuk debaran jantung.</p>
+          <p class="note" data-lang-cn>用印尼日常口语表达。拟声词改用印尼语对应的"deg-degan"。</p>
+        </div>
+        <div class="panel">
+          <span class="panel-tag tag-cn">CN · transcreated</span>
+          <p class="bubble-text">"忙得连猫都想雇"</p>
+          <p class="sfx">砰砰</p>
+          <p class="note" data-lang-en class="active">Preserves cat reference (works in CN), uses CN heart-beat onomatopoeia "砰砰".</p>
+          <p class="note" data-lang-id>Mempertahankan referensi kucing (bisa di CN), pakai onomatope debar jantung CN "砰砰".</p>
+          <p class="note" data-lang-cn>保留"猫"意象（中文中可行），使用中文心跳拟声词"砰砰"。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="loop">
+      <h2><span class="num">02</span><span data-lang-en class="active">Four-layer agent loop</span><span data-lang-id>Loop empat lapis</span><span data-lang-cn>四层代理流程</span></h2>
+
+      <p class="section-sub" data-lang-en class="active">Each page passes through perception, translation, transcreation, and typesetting. Layers are decoupled so a fan scanlator can swap their own OCR or font matcher without rewriting the agent.</p>
+      <p class="section-sub" data-lang-id>Tiap halaman melewati persepsi, terjemahan, transcreate, lalu typesetting. Lapis-lapis ini terpisah supaya scanlator bisa ganti OCR atau font matcher sendiri tanpa rewrite agent.</p>
+      <p class="section-sub" data-lang-cn>每一页依次通过感知、翻译、创译、排版四层。各层解耦，民间汉化组可替换自己的 OCR 或字型匹配器，无需改写代理。</p>
+
+      <div class="layers">
+        <div class="layer">
+          <div class="layer-num">01 · PERCEPTION</div>
+          <h3 data-lang-en class="active">Read the page</h3>
+          <h3 data-lang-id>Baca halaman</h3>
+          <h3 data-lang-cn>读取页面</h3>
+          <ul data-lang-en class="active">
+            <li>OCR speech bubbles (manga-tuned model)</li>
+            <li>Detect bubble polygons via CV</li>
+            <li>Find SFX text outside bubbles</li>
+            <li>Detect panel reading order (RTL/LTR)</li>
+          </ul>
+          <ul data-lang-id>
+            <li>OCR bubble dialog (model khusus manga)</li>
+            <li>Deteksi polygon bubble via CV</li>
+            <li>Cari teks SFX di luar bubble</li>
+            <li>Deteksi urutan baca panel (RTL/LTR)</li>
+          </ul>
+          <ul data-lang-cn>
+            <li>对漫画对话气泡进行 OCR（漫画专用模型）</li>
+            <li>用 CV 检测气泡多边形</li>
+            <li>识别气泡外的拟声词</li>
+            <li>判断阅读顺序（从右到左 / 从左到右）</li>
+          </ul>
+          <div class="tools"><span>tesseract-jp</span><span>manga-bbox-cv</span><span>sfx-detector</span></div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-num">02 · TRANSLATION</div>
+          <h3 data-lang-en class="active">Translate with context</h3>
+          <h3 data-lang-id>Terjemah dengan konteks</h3>
+          <h3 data-lang-cn>结合上下文翻译</h3>
+          <ul data-lang-en class="active">
+            <li>Per-bubble translate against last 3 panels</li>
+            <li>Character profile cache (name, speech tic)</li>
+            <li>Honorific mapping per target language</li>
+            <li>Style register (formal / casual / dialect)</li>
+          </ul>
+          <ul data-lang-id>
+            <li>Translate per bubble dengan konteks 3 panel terakhir</li>
+            <li>Cache profil karakter (nama, ciri bicara)</li>
+            <li>Mapping honorific per bahasa target</li>
+            <li>Register gaya (formal / kasual / dialek)</li>
+          </ul>
+          <ul data-lang-cn>
+            <li>结合前 3 格上下文逐气泡翻译</li>
+            <li>角色档案缓存（姓名、口癖）</li>
+            <li>按目标语言映射敬称</li>
+            <li>风格语域（正式 / 口语 / 方言）</li>
+          </ul>
+          <div class="tools"><span>llm-translate</span><span>character-cache</span><span>honorific-rules</span></div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-num">03 · TRANSCREATION</div>
+          <h3 data-lang-en class="active">Adapt the joke</h3>
+          <h3 data-lang-id>Adaptasi punchline</h3>
+          <h3 data-lang-cn>笑点本地化</h3>
+          <ul data-lang-en class="active">
+            <li>SFX onomatopoeia mapping per language</li>
+            <li>Idiom transcreation (not literal)</li>
+            <li>Kanji-pun → equivalent target-lang pun</li>
+            <li>Cultural reference: keep, swap, or footnote</li>
+          </ul>
+          <ul data-lang-id>
+            <li>Mapping onomatope SFX per bahasa</li>
+            <li>Transcreate idiom (bukan harfiah)</li>
+            <li>Pun berbasis kanji → padanan pun bahasa target</li>
+            <li>Referensi budaya: pertahankan, ganti, atau footnote</li>
+          </ul>
+          <ul data-lang-cn>
+            <li>各语言拟声词映射</li>
+            <li>习语创译（非直译）</li>
+            <li>汉字双关 → 目标语言对应双关</li>
+            <li>文化参照：保留、替换或加注</li>
+          </ul>
+          <div class="tools"><span>sfx-mapper</span><span>idiom-db</span><span>pun-reconstructor</span></div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-num">04 · TYPESETTING</div>
+          <h3 data-lang-en class="active">Fit the page</h3>
+          <h3 data-lang-id>Pas-kan halaman</h3>
+          <h3 data-lang-cn>适配排版</h3>
+          <ul data-lang-en class="active">
+            <li>Bubble fit (text area vs polygon)</li>
+            <li>Font matching (Wild Words / Mangat / Anime Ace)</li>
+            <li>SFX styling (italic + bold + skew)</li>
+            <li>RTL→LTR panel-order flip if needed</li>
+          </ul>
+          <ul data-lang-id>
+            <li>Bubble fit (luas teks vs polygon)</li>
+            <li>Pencocokan font (Wild Words / Mangat / Anime Ace)</li>
+            <li>Styling SFX (italic + bold + skew)</li>
+            <li>Flip urutan panel RTL→LTR jika perlu</li>
+          </ul>
+          <ul data-lang-cn>
+            <li>气泡适配（文本面积 vs 多边形）</li>
+            <li>字型匹配（Wild Words / Mangat / Anime Ace）</li>
+            <li>拟声词风格（斜体 + 粗体 + 倾斜）</li>
+            <li>必要时翻转阅读顺序（RTL→LTR）</li>
+          </ul>
+          <div class="tools"><span>bubble-fit</span><span>font-pool</span><span>sfx-styler</span><span>order-flipper</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="cost">
+      <h2><span class="num">03</span><span data-lang-en class="active">Cost-tier routing</span><span data-lang-id>Cost-tier routing</span><span data-lang-cn>分级成本路由</span></h2>
+
+      <p class="section-sub" data-lang-en class="active">Most of the work — OCR, raw translate, format, bubble fit, RTL flip — belongs on a small fast cheap model. Only the cultural transcreation and SFX onomatopoeia mapping need a smart tier. ~80/20 split keeps per-page cost in low-cent range.</p>
+      <p class="section-sub" data-lang-id>Sebagian besar pekerjaan — OCR, translate mentah, format, bubble fit, flip RTL — cocok di model kecil cepat murah. Hanya transcreate budaya dan SFX yang butuh tier pintar. Split ~80/20 jaga biaya per halaman di kisaran sen rendah.</p>
+      <p class="section-sub" data-lang-cn>大部分工作 — OCR、原始翻译、格式化、气泡适配、阅读顺序翻转 — 都适合便宜小模型。仅文化创译与拟声词映射需要高阶层。~80/20 分配将每页成本控制在分级范围内。</p>
+
+      <div class="tier">
+        <div>
+          <strong data-lang-en class="active">Per-page work distribution</strong>
+          <strong data-lang-id>Distribusi kerja per halaman</strong>
+          <strong data-lang-cn>每页工作分配</strong>
+        </div>
+        <div class="tier-bar">
+          <div class="tier-cheap">~80% cheap</div>
+          <div class="tier-smart">~20% smart</div>
+        </div>
+        <div class="tier-legend">
+          <div><span class="tier-dot cheap"></span><span data-lang-en class="active">OCR · raw translate · format · bubble fit · RTL flip · honorific map</span><span data-lang-id>OCR · translate mentah · format · bubble fit · flip RTL · map honorific</span><span data-lang-cn>OCR · 原始翻译 · 格式化 · 气泡适配 · 顺序翻转 · 敬称映射</span></div>
+        </div>
+        <div class="tier-legend">
+          <div><span class="tier-dot smart"></span><span data-lang-en class="active">SFX onomatopoeia mapping · idiom transcreation · joke reconstruction · cultural reference handling</span><span data-lang-id>Mapping onomatope SFX · transcreate idiom · rekonstruksi joke · handling referensi budaya</span><span data-lang-cn>拟声词映射 · 习语创译 · 笑点重构 · 文化参照处理</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="arch">
+      <h2><span class="num">04</span><span data-lang-en class="active">System architecture</span><span data-lang-id>Arsitektur sistem</span><span data-lang-cn>系统架构</span></h2>
+
+      <p class="section-sub" data-lang-en class="active">Pipeline runs as four loosely-coupled layers, each replaceable. Bring your own OCR, your own LLM, your own font pool.</p>
+      <p class="section-sub" data-lang-id>Pipeline jalan sebagai empat lapis yang loose-coupled, masing-masing bisa diganti. Bawa OCR sendiri, LLM sendiri, font pool sendiri.</p>
+      <p class="section-sub" data-lang-cn>流程为四层松耦合架构，每一层均可替换。可自带 OCR、LLM、字型库。</p>
+
+      <div class="arch">
+        <img src="assets/architecture.svg" alt="Four-layer architecture: input page, perception, translation, transcreation, typesetting, output page" />
+      </div>
+    </section>
+
+    <section class="wrap" id="scope">
+      <h2><span class="num">05</span><span data-lang-en class="active">What's intentionally not in scope</span><span data-lang-id>Yang sengaja tidak masuk scope</span><span data-lang-cn>明确不纳入范围</span></h2>
+
+      <ul data-lang-en class="active">
+        <li><strong>Pirate scanlation pipeline.</strong> The agent is a tool, not a distribution platform. Source rights stay with the publisher.</li>
+        <li><strong>Voice acting / dub generation.</strong> Out of scope — manga is a print medium first.</li>
+        <li><strong>Auto-coloring of black-and-white pages.</strong> Color is artistic intent, not a localization decision.</li>
+        <li><strong>End-to-end studio replacement.</strong> A human translator is still in the loop on smart-tier output.</li>
+      </ul>
+      <ul data-lang-id>
+        <li><strong>Pipeline scanlation bajakan.</strong> Agent ini alat, bukan platform distribusi. Hak sumber tetap milik penerbit.</li>
+        <li><strong>Voice acting / dub.</strong> Di luar scope — manga adalah medium cetak.</li>
+        <li><strong>Pewarnaan otomatis halaman hitam-putih.</strong> Warna adalah niat artistik, bukan keputusan lokalisasi.</li>
+        <li><strong>Mengganti studio penuh.</strong> Penerjemah manusia tetap di loop untuk output smart-tier.</li>
+      </ul>
+      <ul data-lang-cn>
+        <li><strong>盗版汉化分发管道。</strong>本代理是工具，不是分发平台。版权归出版方。</li>
+        <li><strong>配音 / 配音生成。</strong>不在范围 — 漫画首先是印刷媒介。</li>
+        <li><strong>黑白页自动上色。</strong>色彩属艺术决定，非本地化决定。</li>
+        <li><strong>完全替代工作室。</strong>智能层输出仍需人工译者把关。</li>
+      </ul>
+    </section>
+
+    <section class="wrap" id="risk">
+      <h2><span class="num">06</span><span data-lang-en class="active">Biggest open risk</span><span data-lang-id>Risiko terbuka terbesar</span><span data-lang-cn>最大未解风险</span></h2>
+
+      <p class="section-sub" data-lang-en class="active"><strong>SFX onomatopoeia is a creative bottleneck.</strong> A literal どきどき → "doki doki" satisfies fans of Japanese conventions but breaks for general EN/ID/CN readers. We treat the SFX mapper as a tunable artistic policy — fan scanlator vs licensed studio choose differently. Not a "solve once" problem.</p>
+      <p class="section-sub" data-lang-id><strong>SFX onomatope adalah bottleneck kreatif.</strong> どきどき → "doki doki" harfiah memuaskan fans konvensi Jepang tapi gagal untuk pembaca umum EN/ID/CN. SFX mapper kami perlakukan sebagai kebijakan artistik yang bisa di-tune — scanlator fan vs studio lisensi pilih beda. Bukan masalah "selesai sekali".</p>
+      <p class="section-sub" data-lang-cn><strong>拟声词本地化是创意瓶颈。</strong>「どきどき」直译为 "doki doki" 能讨好日漫核心粉，但对一般 EN/ID/CN 读者会不通。我们把拟声词映射当作可调艺术策略 — 民间汉化组与官方授权工作室会做不同选择。不是"一次解决"的问题。</p>
+    </section>
+
+    <section class="wrap" id="roadmap">
+      <h2><span class="num">07</span><span data-lang-en class="active">Roadmap</span><span data-lang-id>Roadmap</span><span data-lang-cn>路线图</span></h2>
+
+      <div class="roadmap">
+        <div class="milestone done">
+          <div class="m-tag">M0 · DONE</div>
+          <div data-lang-en class="active">Concept · landing · interactive demo · architecture spec · cultural transcreation samples</div>
+          <div data-lang-id>Konsep · landing · demo interaktif · spec arsitektur · contoh transcreate budaya</div>
+          <div data-lang-cn>概念 · 着陆页 · 交互演示 · 架构文档 · 创译示例</div>
+        </div>
+        <div class="milestone now">
+          <div class="m-tag">M1 · NEXT</div>
+          <div data-lang-en class="active">CLI proof: PNG manga panel → JSON output (bubble bbox + translation + SFX mapping). Bring-your-own-LLM mode.</div>
+          <div data-lang-id>Bukti CLI: panel manga PNG → output JSON (bbox bubble + terjemahan + mapping SFX). Mode bawa LLM sendiri.</div>
+          <div data-lang-cn>命令行验证：PNG 漫画 → JSON 输出（气泡 bbox + 翻译 + 拟声词映射）。可自带 LLM。</div>
+        </div>
+        <div class="milestone next">
+          <div class="m-tag">M2</div>
+          <div data-lang-en class="active">Web SPA: drag-drop a page, see it localized inline, manual fix-up tool for typesetters.</div>
+          <div data-lang-id>Web SPA: drag-drop halaman, lihat lokalisasi inline, tool fix-up manual untuk typesetter.</div>
+          <div data-lang-cn>Web SPA：拖入一页，实时显示本地化结果，提供排版师手工修整工具。</div>
+        </div>
+        <div class="milestone next">
+          <div class="m-tag">M3</div>
+          <div data-lang-en class="active">Scanlator group integration: Discord bot, batch upload, team review workflow, glossary persistence per series.</div>
+          <div data-lang-id>Integrasi grup scanlator: Discord bot, upload batch, workflow review tim, glossary persisten per seri.</div>
+          <div data-lang-cn>汉化组整合：Discord 机器人、批量上传、团队审稿流程、按系列保留术语表。</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div data-lang-en class="active">MIT licensed · concept stage / pre-MVP · made for translators, not to replace them.</div>
+        <div data-lang-id>Lisensi MIT · tahap konsep / pra-MVP · dibuat untuk penerjemah, bukan menggantikan mereka.</div>
+        <div data-lang-cn>MIT 许可 · 概念阶段 / 预 MVP · 为译者而造，不是取代译者。</div>
+      </div>
+    </footer>
+  </body>
+</html>

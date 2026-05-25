@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Four manga panels showing the same scene localized into JP, EN, ID, and CN">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f3ecdc"/>
+    </linearGradient>
+    <pattern id="tone" patternUnits="userSpaceOnUse" width="6" height="6">
+      <circle cx="3" cy="3" r="0.8" fill="#1a1a1a" opacity="0.18"/>
+    </pattern>
+  </defs>
+
+  <rect width="480" height="360" fill="url(#paper)"/>
+
+  <!-- Frame border -->
+  <rect x="8" y="8" width="464" height="344" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+
+  <!-- Quadrant 1: JP (top-left) -->
+  <g>
+    <rect x="14" y="14" width="226" height="166" fill="url(#paper)" stroke="#1a1a1a" stroke-width="1.5"/>
+    <rect x="14" y="14" width="226" height="166" fill="url(#tone)" opacity="0.4"/>
+    <!-- Speech bubble -->
+    <ellipse cx="120" cy="70" rx="78" ry="36" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <polygon points="100,100 110,118 122,103" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <text x="120" y="68" text-anchor="middle" font-family="serif" font-weight="700" font-size="20" fill="#1a1a1a">どうした</text>
+    <text x="120" y="92" text-anchor="middle" font-family="serif" font-weight="700" font-size="20" fill="#1a1a1a">んだ?</text>
+    <!-- SFX -->
+    <text x="170" y="155" font-family="Impact, sans-serif" font-weight="900" font-size="22" fill="#c0392b" transform="rotate(-12 170 155)">どきどき</text>
+    <!-- Tag -->
+    <rect x="20" y="160" width="34" height="14" fill="#1f3b6f"/>
+    <text x="37" y="171" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="#ffffff">JP</text>
+  </g>
+
+  <!-- Quadrant 2: EN (top-right) -->
+  <g>
+    <rect x="240" y="14" width="226" height="166" fill="url(#paper)" stroke="#1a1a1a" stroke-width="1.5"/>
+    <rect x="240" y="14" width="226" height="166" fill="url(#tone)" opacity="0.4"/>
+    <ellipse cx="346" cy="70" rx="86" ry="36" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <polygon points="326,100 336,118 348,103" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <text x="346" y="68" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#1a1a1a">What's the</text>
+    <text x="346" y="88" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#1a1a1a">matter?</text>
+    <text x="396" y="155" font-family="Impact, sans-serif" font-weight="900" font-size="20" fill="#c0392b" transform="rotate(-12 396 155)">thump-thump</text>
+    <rect x="246" y="160" width="34" height="14" fill="#1d6f47"/>
+    <text x="263" y="171" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="#ffffff">EN</text>
+  </g>
+
+  <!-- Quadrant 3: ID (bottom-left) -->
+  <g>
+    <rect x="14" y="180" width="226" height="166" fill="url(#paper)" stroke="#1a1a1a" stroke-width="1.5"/>
+    <rect x="14" y="180" width="226" height="166" fill="url(#tone)" opacity="0.4"/>
+    <ellipse cx="120" cy="236" rx="80" ry="36" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <polygon points="100,266 110,284 122,269" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <text x="120" y="234" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#1a1a1a">Ada apa,</text>
+    <text x="120" y="254" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="16" fill="#1a1a1a">kenapa?</text>
+    <text x="172" y="320" font-family="Impact, sans-serif" font-weight="900" font-size="20" fill="#c0392b" transform="rotate(-12 172 320)">deg-degan</text>
+    <rect x="20" y="326" width="34" height="14" fill="#b9521a"/>
+    <text x="37" y="337" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="#ffffff">ID</text>
+  </g>
+
+  <!-- Quadrant 4: CN (bottom-right) -->
+  <g>
+    <rect x="240" y="180" width="226" height="166" fill="url(#paper)" stroke="#1a1a1a" stroke-width="1.5"/>
+    <rect x="240" y="180" width="226" height="166" fill="url(#tone)" opacity="0.4"/>
+    <ellipse cx="346" cy="236" rx="78" ry="36" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <polygon points="326,266 336,284 348,269" fill="#ffffff" stroke="#1a1a1a" stroke-width="1.8"/>
+    <text x="346" y="234" text-anchor="middle" font-family="serif" font-weight="700" font-size="20" fill="#1a1a1a">怎么了？</text>
+    <text x="346" y="258" text-anchor="middle" font-family="serif" font-weight="700" font-size="14" fill="#6e6e6e">出什么事了？</text>
+    <text x="396" y="320" font-family="Impact, sans-serif" font-weight="900" font-size="20" fill="#c0392b" transform="rotate(-12 396 320)">砰砰</text>
+    <rect x="246" y="326" width="34" height="14" fill="#8b1f1f"/>
+    <text x="263" y="337" text-anchor="middle" font-family="monospace" font-weight="700" font-size="10" fill="#ffffff">CN</text>
+  </g>
+
+  <!-- Center divider lines -->
+  <line x1="240" y1="14" x2="240" y2="346" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="14" y1="180" x2="466" y2="180" stroke="#1a1a1a" stroke-width="1.5"/>
+</svg>
